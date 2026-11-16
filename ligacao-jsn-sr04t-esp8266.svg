@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <style>
+      .title{font:700 34px Arial,Helvetica,sans-serif;fill:#111}
+      .label{font:700 22px Arial,Helvetica,sans-serif;fill:#111}
+      .small{font:18px Arial,Helvetica,sans-serif;fill:#111}
+      .tiny{font:16px Arial,Helvetica,sans-serif;fill:#111}
+      .box{fill:#f8fafc;stroke:#111;stroke-width:3;rx:16}
+      .pin{fill:#fff;stroke:#111;stroke-width:2}
+      .red{stroke:#e11d48;stroke-width:8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .gnd{stroke:#111827;stroke-width:8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .yellow{stroke:#f59e0b;stroke-width:7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .orange{stroke:#ea580c;stroke-width:7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .green{stroke:#16a34a;stroke-width:7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#111;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+      .junction{fill:#111}
+      .warn{fill:#fff7ed;stroke:#ea580c;stroke-width:3;rx:12}
+      .resistor{fill:#fef3c7;stroke:#111;stroke-width:3;rx:8}
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="1000" fill="#fff"/>
+  <text x="800" y="54" text-anchor="middle" class="title">Ligacao correta: JSN-SR04T + ESP8266 NodeMCU</text>
+  <text x="800" y="86" text-anchor="middle" class="small">Usando VIN/5V da USB, GND comum e divisor de tensao no ECHO</text>
+
+  <!-- Warning -->
+  <rect x="460" y="112" width="680" height="58" class="warn"/>
+  <text x="800" y="149" text-anchor="middle" class="label">NAO LIGAR +5V DIRETO AO GND</text>
+
+  <!-- ESP8266 -->
+  <rect x="1110" y="230" width="330" height="560" class="box"/>
+  <text x="1275" y="270" text-anchor="middle" class="label">ESP8266 NodeMCU</text>
+  <rect x="1128" y="320" width="112" height="42" class="pin"/>
+  <text x="1184" y="348" text-anchor="middle" class="label">VIN/5V</text>
+  <rect x="1128" y="390" width="112" height="42" class="pin"/>
+  <text x="1184" y="418" text-anchor="middle" class="label">GND</text>
+  <rect x="1128" y="515" width="112" height="42" class="pin"/>
+  <text x="1184" y="543" text-anchor="middle" class="label">D5</text>
+  <text x="1322" y="543" text-anchor="middle" class="small">TRIG</text>
+  <rect x="1128" y="635" width="112" height="42" class="pin"/>
+  <text x="1184" y="663" text-anchor="middle" class="label">D6</text>
+  <text x="1322" y="663" text-anchor="middle" class="small">ECHO</text>
+  <text x="1275" y="740" text-anchor="middle" class="tiny">D1/D2 ficam livres para a tela OLED I2C</text>
+
+  <!-- JSN module -->
+  <rect x="125" y="230" width="350" height="560" class="box"/>
+  <text x="300" y="270" text-anchor="middle" class="label">JSN-SR04T</text>
+  <text x="300" y="304" text-anchor="middle" class="small">Modulo ultrassonico impermeavel</text>
+  <rect x="360" y="320" width="95" height="42" class="pin"/>
+  <text x="407" y="348" text-anchor="middle" class="label">VCC</text>
+  <rect x="360" y="390" width="95" height="42" class="pin"/>
+  <text x="407" y="418" text-anchor="middle" class="label">GND</text>
+  <rect x="360" y="515" width="95" height="42" class="pin"/>
+  <text x="407" y="543" text-anchor="middle" class="label">TRIG</text>
+  <rect x="360" y="635" width="95" height="42" class="pin"/>
+  <text x="407" y="663" text-anchor="middle" class="label">ECHO</text>
+
+  <!-- Power rails from ESP VIN/GND to sensor -->
+  <path class="red" d="M1128 341 H940 V180 H92 V341 H360"/>
+  <text x="185" y="166" class="label" fill="#e11d48">+5V da USB / VIN</text>
+  <text x="625" y="206" class="small" fill="#e11d48">positivo alimenta somente VCC</text>
+
+  <path class="gnd" d="M1128 411 H990 V860 H92 V411 H360"/>
+  <text x="185" y="894" class="label">GND COMUM</text>
+  <text x="595" y="842" class="small">terra comum entre ESP8266 e sensor</text>
+
+  <!-- TRIG direct -->
+  <path class="yellow" d="M455 536 H1128"/>
+  <text x="740" y="522" text-anchor="middle" class="label" fill="#b45309">TRIG direto: JSN TRIG - D5</text>
+
+  <!-- ECHO divider -->
+  <text x="790" y="610" text-anchor="middle" class="label">DIVISOR DE TENSAO DO ECHO</text>
+  <path class="orange" d="M455 656 H620"/>
+  <text x="528" y="640" text-anchor="middle" class="small" fill="#c2410c">ECHO 5V</text>
+
+  <rect x="620" y="633" width="130" height="46" class="resistor"/>
+  <text x="685" y="663" text-anchor="middle" class="label">R1 1k</text>
+
+  <path class="orange" d="M750 656 H810"/>
+  <circle cx="810" cy="656" r="10" class="junction"/>
+  <text x="810" y="628" text-anchor="middle" class="small">ponto central</text>
+
+  <path class="green" d="M810 656 H1128"/>
+  <text x="970" y="640" text-anchor="middle" class="label" fill="#15803d">SINAL 3.3V - D6</text>
+
+  <!-- R2 to ground -->
+  <path class="thin" d="M810 656 V710"/>
+  <rect x="745" y="710" width="130" height="46" class="resistor"/>
+  <text x="810" y="740" text-anchor="middle" class="label">R2 2k</text>
+  <path class="gnd" d="M810 756 V860"/>
+  <circle cx="810" cy="860" r="10" class="junction"/>
+
+  <!-- Optional capacitor note, kept out of the wiring path to avoid ambiguity -->
+  <rect x="520" y="245" width="520" height="72" fill="#eef6ff" stroke="#60a5fa" stroke-width="2" rx="10"/>
+  <text x="780" y="273" text-anchor="middle" class="small">CAPACITOR 100uF OPCIONAL</text>
+  <text x="780" y="300" text-anchor="middle" class="tiny">Se usar: perna + no VCC do JSN e perna - no GND do JSN</text>
+
+  <!-- Notes -->
+  <rect x="125" y="905" width="1315" height="58" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2" rx="10"/>
+  <text x="145" y="930" class="small">Resumo: VCC do JSN vai no VIN/5V. GND do JSN e GND do ESP ficam juntos. ECHO nunca entra direto no ESP8266: passa por R1 1k e R2 2k.</text>
+  <text x="145" y="954" class="small">Nao existe fio ligando +5V direto ao GND. Se usar capacitor opcional, ligue + no VCC do sensor e - no GND do sensor.</text>
+</svg>
